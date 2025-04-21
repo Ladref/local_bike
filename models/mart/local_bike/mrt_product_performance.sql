@@ -15,4 +15,4 @@ select
     sum(s.revenue) as total_revenue
 from sales s
 join products p on s.product_id = p.product_id
-group by p.product_id, p.product_name, p.brand_name, p.category_name
+group by s.order_date, p.product_id, p.product_name, p.brand_name, p.category_name

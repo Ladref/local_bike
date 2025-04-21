@@ -6,7 +6,6 @@ stores as (
 )
 
 select
-  s.order_date,
   s.order_id,
   s.product_id,
   s.quantity,
