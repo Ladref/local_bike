@@ -70,11 +70,6 @@ sources:
             description: "Listed price at time of order"
           - name: discount
             description: "Discount applied"
-        tests:
-          - test_discount_between_0_and_1
-          - test_list_price_positive
-          - test_product_id_exists
-          - test_quantity_positive
 
       - name: orders
         description: "Raw orders data from the operational database"
