@@ -4,7 +4,6 @@ sources:
   - name: local_bike
     schema: local_bike
     tables:
-
       - name: brands
         description: "Brand reference data"
         columns:
@@ -15,7 +14,7 @@ sources:
               - not_null
           - name: brand_name
             description: "Name of the brand"
-      
+
       - name: categories
         description: "Category reference data"
         columns:
@@ -26,7 +25,7 @@ sources:
               - not_null
           - name: category_name
             description: "Name of the category"
-      
+
       - name: customers
         description: "Raw customers data from the operational database"
         columns:
@@ -51,17 +50,18 @@ sources:
             description: "State"
           - name: zip_code
             description: "ZIP code"
-      
+
       - name: order_items
         description: "Raw order item data from the operational database"
         columns:
           - name: order_id
             description: "Order ID"
             tests:
-              - unique
               - not_null
           - name: item_id
             description: "Item ID"
+            tests:
+              - not_null
           - name: product_id
             description: "Product ID"
           - name: quantity
@@ -70,4 +70,106 @@ sources:
             description: "Listed price at time of order"
           - name: discount
             description: "Discount applied"
+        tests:
+          - test_discount_between_0_and_1
+          - test_list_price_positive
+          - test_product_id_exists
+          - test_quantity_positive
 
+      - name: orders
+        description: "Raw orders data from the operational database"
+        columns:
+          - name: order_id
+            description: "Primary key of the order"
+            tests:
+              - unique
+              - not_null
+          - name: customer_id
+            description: "Reference to the customer who placed the order"
+          - name: order_status
+            description: "Status of the order"
+          - name: order_date
+            description: "Date when the order was placed"
+          - name: required_date
+            description: "Date by which the order is required"
+          - name: shipped_date
+            description: "Date when the order was shipped"
+          - name: store_id
+            description: "Store handling the order"
+          - name: staff_id
+            description: "Staff member managing the order"
+
+      - name: products
+        description: "Raw products data from the operational database"
+        columns:
+          - name: product_id
+            description: "Primary key of the product"
+            tests:
+              - unique
+              - not_null
+          - name: product_name
+            description: "Name of the product"
+          - name: brand_id
+            description: "Reference to the brand"
+          - name: category_id
+            description: "Reference to the product category"
+          - name: model_year
+            description: "Year the product model was released"
+          - name: list_price
+            description: "Listed price of the product"
+
+      - name: staffs
+        description: "Raw staff data from operational source"
+        columns:
+          - name: staff_id
+            description: "Primary key for staff"
+            tests:
+              - unique
+              - not_null
+          - name: first_name
+            description: "First name of the staff"
+          - name: last_name
+            description: "Last name of the staff"
+          - name: email
+            description: "Email of the staff"
+          - name: phone
+            description: "Phone of the staff"
+          - name: active
+            description: "Staff active status"
+          - name: store_id
+            description: "Foreign key to store"
+          - name: manager_id
+            description: "ID of the staff's manager"
+
+      - name: stocks
+        description: "Stock levels per store and product"
+        columns:
+          - name: store_id
+            description: "Store where the product is stocked"
+          - name: product_id
+            description: "Product stocked"
+          - name: quantity
+            description: "Quantity in stock"
+
+      - name: stores
+        description: "Store locations and details"
+        columns:
+          - name: store_id
+            description: "Primary key of the store"
+            tests:
+              - unique
+              - not_null
+          - name: store_name
+            description: "Store name"
+          - name: phone
+            description: "Phone number of the store"
+          - name: email
+            description: "Email address of the store"
+          - name: street
+            description: "Street address"
+          - name: city
+            description: "City where store is located"
+          - name: state
+            description: "State"
+          - name: zip_code
+            description: "ZIP code"
