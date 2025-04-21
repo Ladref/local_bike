@@ -1,0 +1,73 @@
+version: 2
+
+sources:
+  - name: local_bike
+    schema: local_bike
+    tables:
+
+      - name: brands
+        description: "Brand reference data"
+        columns:
+          - name: brand_id
+            description: "Brand ID"
+            tests:
+              - unique
+              - not_null
+          - name: brand_name
+            description: "Name of the brand"
+      
+      - name: categories
+        description: "Category reference data"
+        columns:
+          - name: category_id
+            description: "Category ID"
+            tests:
+              - unique
+              - not_null
+          - name: category_name
+            description: "Name of the category"
+      
+      - name: customers
+        description: "Raw customers data from the operational database"
+        columns:
+          - name: customer_id
+            description: "Primary key of the customer"
+            tests:
+              - unique
+              - not_null
+          - name: first_name
+            description: "First name of the customer"
+          - name: last_name
+            description: "Last name of the customer"
+          - name: phone
+            description: "Phone number"
+          - name: email
+            description: "Email address"
+          - name: street
+            description: "Street address"
+          - name: city
+            description: "City of the customer"
+          - name: state
+            description: "State"
+          - name: zip_code
+            description: "ZIP code"
+      
+      - name: order_items
+        description: "Raw order item data from the operational database"
+        columns:
+          - name: order_id
+            description: "Order ID"
+            tests:
+              - unique
+              - not_null
+          - name: item_id
+            description: "Item ID"
+          - name: product_id
+            description: "Product ID"
+          - name: quantity
+            description: "Quantity ordered"
+          - name: list_price
+            description: "Listed price at time of order"
+          - name: discount
+            description: "Discount applied"
+
