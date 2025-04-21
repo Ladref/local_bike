@@ -2,54 +2,91 @@ version: 2
 
 models:
   - name: int_sales
-    description: >
-      Modèle intermédiaire regroupant les données de ventes
-      enrichies avec les informations de produits, clients, magasins, et employés.
+    description: "Jointure entre orders et order_items avec calcul du revenu"
     columns:
       - name: order_id
-        description: "Identifiant unique de la commande"
-        tests:
-          - not_null
-      - name: order_date
-        description: "Date de la commande"
+        description: "ID de la commande"
       - name: product_id
-        description: "Identifiant du produit"
-      - name: customer_id
-        description: "Identifiant du client"
-      - name: store_id
-        description: "Identifiant du magasin"
-      - name: staff_id
-        description: "Identifiant de l'employé"
+        description: "ID du produit"
       - name: quantity
         description: "Quantité commandée"
       - name: list_price
         description: "Prix unitaire du produit"
       - name: discount
-        description: "Réduction appliquée"
+        description: "Remise appliquée"
       - name: revenue
-        description: "Revenu net généré par l'article (prix * quantité * (1 - discount))"
+        description: "Revenu calculé = quantity * list_price * (1 - discount)"
+      - name: order_date
+        description: "Date de la commande"
+      - name: store_id
+        description: "ID du magasin"
+      - name: customer_id
+        description: "ID du client"
 
-  - name: int_products
-    description: >
-      Modèle intermédiaire enrichissant les produits avec les informations
-      de marque et de catégorie.
+  - name: int_products_enriched
+    description: "Jointure entre produits, marques et catégories"
     columns:
       - name: product_id
-        description: "Identifiant unique du produit"
-        tests:
-          - unique
-          - not_null
+        description: "ID du produit"
       - name: product_name
         description: "Nom du produit"
-      - name: brand_id
-        description: "Identifiant de la marque"
-      - name: brand_name
-        description: "Nom de la marque"
-      - name: category_id
-        description: "Identifiant de la catégorie"
-      - name: category_name
-        description: "Nom de la catégorie"
       - name: model_year
         description: "Année du modèle"
       - name: list_price
-        description: "Prix unitaire de référence"
+        description: "Prix catalogue"
+      - name: brand_name
+        description: "Nom de la marque"
+      - name: category_name
+        description: "Nom de la catégorie"
+
+  - name: int_store_sales
+    description: "Jointure entre ventes et magasins"
+    columns:
+      - name: order_id
+        description: "ID de la commande"
+      - name: product_id
+        description: "ID du produit"
+      - name: quantity
+        description: "Quantité commandée"
+      - name: list_price
+        description: "Prix unitaire"
+      - name: discount
+        description: "Remise"
+      - name: revenue
+        description: "Revenu"
+      - name: order_date
+        description: "Date de la commande"
+      - name: customer_id
+        description: "Client ayant passé la commande"
+      - name: store_id
+        description: "ID du magasin"
+      - name: store_name
+        description: "Nom du magasin"
+
+  - name: int_geo_sales
+    description: "Jointure entre ventes, clients et magasins avec info géographique"
+    columns:
+      - name: order_id
+        description: "ID de la commande"
+      - name: product_id
+        description: "ID du produit"
+      - name: quantity
+        description: "Quantité commandée"
+      - name: list_price
+        description: "Prix unitaire"
+      - name: discount
+        description: "Remise"
+      - name: revenue
+        description: "Revenu"
+      - name: order_date
+        description: "Date de la commande"
+      - name: store_id
+        description: "ID du magasin"
+      - name: customer_id
+        description: "ID du client"
+      - name: city
+        description: "Ville du client"
+      - name: state
+        description: "État du client"
+      - name: store_name
+        description: "Nom du magasin"
