@@ -2,91 +2,91 @@ version: 2
 
 models:
   - name: int_sales
-    description: "Jointure entre orders et order_items avec calcul du revenu"
+    description: "Intermediate model combining orders and order_items with revenue calculation"
     columns:
       - name: order_id
-        description: "ID de la commande"
+        description: "Unique identifier for each order"
       - name: product_id
-        description: "ID du produit"
+        description: "Product ID from the order"
       - name: quantity
-        description: "Quantité commandée"
+        description: "Quantity ordered"
       - name: list_price
-        description: "Prix unitaire du produit"
+        description: "List price at the time of order"
       - name: discount
-        description: "Remise appliquée"
+        description: "Discount applied to the item"
       - name: revenue
-        description: "Revenu calculé = quantity * list_price * (1 - discount)"
+        description: "Revenue calculated after discount"
       - name: order_date
-        description: "Date de la commande"
-      - name: store_id
-        description: "ID du magasin"
+        description: "Date of the order"
       - name: customer_id
-        description: "ID du client"
+        description: "Customer who placed the order"
+      - name: store_id
+        description: "Store handling the order"
 
   - name: int_products_enriched
-    description: "Jointure entre produits, marques et catégories"
+    description: "Intermediate model combining products with brand and category information"
     columns:
       - name: product_id
-        description: "ID du produit"
+        description: "Product ID"
       - name: product_name
-        description: "Nom du produit"
-      - name: model_year
-        description: "Année du modèle"
-      - name: list_price
-        description: "Prix catalogue"
+        description: "Name of the product"
+      - name: brand_id
+        description: "ID of the brand"
       - name: brand_name
-        description: "Nom de la marque"
+        description: "Name of the brand"
+      - name: category_id
+        description: "ID of the category"
       - name: category_name
-        description: "Nom de la catégorie"
+        description: "Name of the category"
+      - name: model_year
+        description: "Model year of the product"
+      - name: list_price
+        description: "List price of the product"
 
   - name: int_store_sales
-    description: "Jointure entre ventes et magasins"
+    description: "Intermediate model combining sales data with store information"
     columns:
-      - name: order_id
-        description: "ID de la commande"
-      - name: product_id
-        description: "ID du produit"
-      - name: quantity
-        description: "Quantité commandée"
-      - name: list_price
-        description: "Prix unitaire"
-      - name: discount
-        description: "Remise"
-      - name: revenue
-        description: "Revenu"
       - name: order_date
-        description: "Date de la commande"
+        description: "Date of the order"
+      - name: order_id
+        description: "Order ID"
+      - name: product_id
+        description: "Product ID"
+      - name: quantity
+        description: "Quantity sold"
+      - name: list_price
+        description: "Price before discount"
+      - name: discount
+        description: "Discount applied"
+      - name: revenue
+        description: "Revenue after discount"
       - name: customer_id
-        description: "Client ayant passé la commande"
+        description: "Customer ID"
       - name: store_id
-        description: "ID du magasin"
+        description: "Store ID"
       - name: store_name
-        description: "Nom du magasin"
+        description: "Store name"
 
   - name: int_geo_sales
-    description: "Jointure entre ventes, clients et magasins avec info géographique"
+    description: "Intermediate model combining sales, stores and customer geography"
     columns:
       - name: order_id
-        description: "ID de la commande"
-      - name: product_id
-        description: "ID du produit"
-      - name: quantity
-        description: "Quantité commandée"
-      - name: list_price
-        description: "Prix unitaire"
-      - name: discount
-        description: "Remise"
-      - name: revenue
-        description: "Revenu"
-      - name: order_date
-        description: "Date de la commande"
+        description: "Order ID"
       - name: store_id
-        description: "ID du magasin"
-      - name: customer_id
-        description: "ID du client"
+        description: "Store ID"
+      - name: order_date
+        description: "Date of the order"
+      - name: product_id
+        description: "Product ID"
+      - name: quantity
+        description: "Quantity ordered"
+      - name: list_price
+        description: "List price of the product"
+      - name: discount
+        description: "Discount applied"
+      - name: revenue
+        description: "Revenue from the order"
       - name: city
-        description: "Ville du client"
+        description: "Customer city"
       - name: state
-        description: "État du client"
-      - name: store_name
-        description: "Nom du magasin"
+        description: "Customer state"
